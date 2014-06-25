@@ -1,0 +1,54 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+{% for novelty in novelties.items %}
+{% include 'novelty.html' %}
+{% endfor %}
+<ul class="pager">
+    {% if novelties.has_prev %}
+    <li class="previous"><a
+            href="{{ url_for('render_novelties', time_mode=g.time_mode, site=g.site, page = novelties.prev_num) }}"><span
+            class="glyphicon glyphicon-arrow-left"></span></a>
+    </li>
+    {% else %}
+    <li class="previous disabled"><span class="glyphicon glyphicon-arrow-left"></span></li>
+    {% endif %}
+    {% if novelties.has_next %}
+    <li class="next"><a
+            href="{{ url_for('render_novelties', time_mode=g.time_mode, site=g.site, page = novelties.next_num) }}"><span
+            class="glyphicon glyphicon-arrow-right"></span></a>
+    </li>
+    {% else %}
+    <li class="next disabled"><a><span class="glyphicon glyphicon-arrow-right"></span></a></li>
+    {% endif %}
+</ul>
+{% endblock %}
+
+{% block navbar_top_right %}
+<div class="collapse navbar-collapse">
+    <div class="nav navbar-nav navbar-right">
+        {{ nav_bar_times() }}
+    </div>
+</div>
+{% endblock %}
+
+{% block navbar_bottom %}
+<div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+    <div class="container">
+        <div class="navbar-footer">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                {{ nav_bar_sites() }}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

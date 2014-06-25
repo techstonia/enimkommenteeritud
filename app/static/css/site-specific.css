@@ -1,0 +1,88 @@
+.label-default.postimees {
+  background-color: #22ace3;
+}
+
+.label-default.delfi {
+  background-color: #ff9e06;
+}
+
+.label-default.maaleht {
+  background-color: #3aad45;
+}
+
+.label-default.forte {
+  background-color: #94a2a7;
+}
+
+.label-default.epl {
+  background-color: #e14045;
+}
+
+.label-default.arileht {
+  background-color: #3d7f7d;
+}
+
+.label-default.naistekas {
+  background-color: #f27d95;
+}
+
+.label-default.ekspress {
+  background-color: #ce1309;
+}
+
+.label-default.publik {
+  background-color: #fb722b;
+}
+
+.label-default.sport {
+  background-color: #98d538;
+}
+
+.badge {
+  background-color: #d9534f;
+}
+
+.comment-count {
+  text-align: center;
+}
+
+body > .container {
+  padding: 10px 15px 0;
+}
+
+#comment {
+  width: 100%;
+}
+
+.comment-body {
+  padding: 10px;
+}
+
+
+.comment:nth-child(odd) .comment-body {
+  background-color: #eee;
+}
+
+.media.novelty:nth-child(odd) {
+  background-color: #eee;
+}
+
+.media.novelty {
+  padding: 10px 10px;
+  margin-top: 0px;
+  margin-bottom: 0px
+}
+
+.media.novelty h4 {
+  margin-top: 8px;
+  margin-bottom: 5px
+}
+
+.btn.btn-primary {
+  margin-top: 10px;
+}
+
+#nickname {
+  display:none;
+}
+

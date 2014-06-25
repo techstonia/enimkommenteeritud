@@ -1,0 +1,50 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="media">
+    <div class="media-body">
+        <span class="badge">{{novelty.comments_count}}</span>
+        <span class="label label-default {{novelty.site}}">{{novelty.site}}</span>
+
+        <h4><a href="{{novelty.url}}" class="media-heading">{{novelty.headline}}</a></h4>
+        <span>Avaldatud
+            <script>document.write(moment("{{novelty.published_date}}").fromNow());</script>
+        </span>
+    </div>
+</div>
+<hr>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-info">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div class="media">
+    <div class="media-body">
+        <h4 class="media-heading">
+            <span class="glyphicon glyphicon-pencil"></span> Kommenteeri:
+        </h4>
+
+        <form action="" method="post" name="post_comment">
+            {{form.hidden_tag()}}
+            <div id="comment_fields">
+                {{form.comment(cols = 32, rows = 4, placeholder="Sinu kommentaar")}}
+                <div id="nickname">{{ form.nickname(placeholder="Inimestel mitte täita") }}</div>
+            </div>
+            <p>
+                <button type="submit button" class="btn btn-primary">Saada</button>
+        </form>
+    </div>
+</div>
+<div class="comment-container">
+    <br>
+    {% for comment in novelty.comments() %}
+    {% include 'comment.html' %}
+    {% endfor %}
+</div>
+{% endblock %}

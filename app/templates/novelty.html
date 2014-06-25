@@ -1,0 +1,21 @@
+<div class="media novelty">
+    <div class="media-body">
+        <span class="badge">{{novelty.comments_count}}</span>
+        <span class="label label-default {{novelty.site}}">
+            {% if novelty.site == "arileht" %}
+            ärileht
+            {% else %}
+            {{novelty.site}}
+            {% endif %}
+        </span>
+
+        <h4><a href="{{novelty.url}}" class="media-heading">{{novelty.headline}}</a></h4>
+
+        <a href="{{ url_for('novelty_discussion', novelty_id=novelty.id) }}">
+            Kommenteeri ({{ novelty.user_comments_count() }})
+        </a>
+        <span>Avaldatud
+            <script>document.write(moment("{{novelty.published_date}} Z").fromNow());</script>
+        </span>
+    </div>
+</div>

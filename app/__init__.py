@@ -1,0 +1,33 @@
+import os
+from flask import Flask
+from flask.ext.sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config.from_object('config')
+db = SQLAlchemy(app)
+
+
+def log_message(msg):
+    if not app.debug and os.environ.get('HEROKU') is None:
+        import logging
+        from logging.handlers import RotatingFileHandler
+        file_handler = RotatingFileHandler('tmp/microblog.log', 'a', 1 * 1024 * 1024, 10)
+        file_handler.setLevel(logging.INFO)
+        file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+        app.logger.addHandler(file_handler)
+        app.logger.setLevel(logging.INFO)
+        app.logger.info('microblog: %s' % msg)
+
+    if os.environ.get('HEROKU') is not None:
+        import logging
+        stream_handler = logging.StreamHandler()
+        app.logger.addHandler(stream_handler)
+        app.logger.setLevel(logging.INFO)
+        app.logger.info('microblog: %s' % msg)
+
+log_message('startup')
+
+from app import views, models
+from app.views import nav_bar_times, nav_bar_sites
+app.jinja_env.globals['nav_bar_times'] = nav_bar_times
+app.jinja_env.globals['nav_bar_sites'] = nav_bar_sites
